@@ -25,7 +25,10 @@
   id recipient = [[[TTTableField alloc] initWithText:@"Alan Jones" url:TT_NULL_URL] autorelease];
   TTMessageController* controller = [[[TTMessageController alloc] 
     initWithRecipients:[NSArray arrayWithObject:recipient]] autorelease];
-  controller.dataSource = _dataSource;
+ 
+  controller.subject=  @"this is a test subject";
+		
+   controller.dataSource = _dataSource;
   controller.delegate = self;
   [self presentModalViewController:controller animated:YES];
 }
