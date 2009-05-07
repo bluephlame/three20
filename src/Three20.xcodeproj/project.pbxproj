@@ -135,6 +135,12 @@
 		BEF320370F352E7A000DE5D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		BEF341950F8042440027E93C /* TTStyledTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF341940F8042440027E93C /* TTStyledTextLabel.m */; };
 		BEF341970F8042520027E93C /* TTStyledTextLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = BEF341960F8042520027E93C /* TTStyledTextLabel.h */; };
+		D07379260FB182C1002332FD /* TTAddressBookDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D073791E0FB182C1002332FD /* TTAddressBookDataSource.m */; };
+		D07379290FB182C1002332FD /* TTContact.m in Sources */ = {isa = PBXBuildFile; fileRef = D07379210FB182C1002332FD /* TTContact.m */; };
+		D073792C0FB182C1002332FD /* TTContactViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D07379240FB182C1002332FD /* TTContactViewCell.m */; };
+		D07379360FB1B04B002332FD /* TTContact.h in Headers */ = {isa = PBXBuildFile; fileRef = D07379330FB1B04B002332FD /* TTContact.h */; };
+		D07379370FB1B04B002332FD /* TTContactViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D07379340FB1B04B002332FD /* TTContactViewCell.h */; };
+		D073793A0FB1B075002332FD /* TTAddressBookDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D07379390FB1B075002332FD /* TTAddressBookDataSource.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -267,6 +273,12 @@
 		BEF31F6F0F352E64000DE5D2 /* Three20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Three20.h; path = Three20/Three20.h; sourceTree = "<group>"; };
 		BEF341940F8042440027E93C /* TTStyledTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTStyledTextLabel.m; sourceTree = "<group>"; };
 		BEF341960F8042520027E93C /* TTStyledTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTStyledTextLabel.h; path = Three20/TTStyledTextLabel.h; sourceTree = "<group>"; };
+		D073791E0FB182C1002332FD /* TTAddressBookDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTAddressBookDataSource.m; sourceTree = "<group>"; };
+		D07379210FB182C1002332FD /* TTContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTContact.m; sourceTree = "<group>"; };
+		D07379240FB182C1002332FD /* TTContactViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTContactViewCell.m; sourceTree = "<group>"; };
+		D07379330FB1B04B002332FD /* TTContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTContact.h; path = Three20/TTContact.h; sourceTree = SOURCE_ROOT; };
+		D07379340FB1B04B002332FD /* TTContactViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTContactViewCell.h; path = Three20/TTContactViewCell.h; sourceTree = SOURCE_ROOT; };
+		D07379390FB1B075002332FD /* TTAddressBookDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTAddressBookDataSource.h; path = Three20/TTAddressBookDataSource.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -536,6 +548,7 @@
 		BEF321B30F353B78000DE5D2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D073791A0FB182A2002332FD /* AddressBookControllers */,
 				BEF31F6D0F352E64000DE5D2 /* TTViewController.h */,
 				BEF31F570F352E64000DE5D2 /* TTViewController.m */,
 				BEF31F650F352E64000DE5D2 /* TTTableViewController.h */,
@@ -546,6 +559,19 @@
 				BEA69ECA0FAC0FD600DA7DDC /* TTWebController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D073791A0FB182A2002332FD /* AddressBookControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D07379340FB1B04B002332FD /* TTContactViewCell.h */,
+				D07379240FB182C1002332FD /* TTContactViewCell.m */,
+				D07379390FB1B075002332FD /* TTAddressBookDataSource.h */,
+				D073791E0FB182C1002332FD /* TTAddressBookDataSource.m */,
+				D07379330FB1B04B002332FD /* TTContact.h */,
+				D07379210FB182C1002332FD /* TTContact.m */,
+			);
+			name = AddressBookControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -619,6 +645,9 @@
 				BE1942770F9ACE85005F4EFC /* TTStyledLayout.h in Headers */,
 				BEB210D40FA3E784007DEE5F /* NSStringAdditions.h in Headers */,
 				BEA69ECD0FAC0FEC00DA7DDC /* TTWebController.h in Headers */,
+				D07379360FB1B04B002332FD /* TTContact.h in Headers */,
+				D07379370FB1B04B002332FD /* TTContactViewCell.h in Headers */,
+				D073793A0FB1B075002332FD /* TTAddressBookDataSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +754,9 @@
 				BE1942880F9ACEA7005F4EFC /* TTStyledLayout.m in Sources */,
 				BEB210D20FA3E77E007DEE5F /* NSStringAdditions.m in Sources */,
 				BEA69ECB0FAC0FD600DA7DDC /* TTWebController.m in Sources */,
+				D07379260FB182C1002332FD /* TTAddressBookDataSource.m in Sources */,
+				D07379290FB182C1002332FD /* TTContact.m in Sources */,
+				D073792C0FB182C1002332FD /* TTContactViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

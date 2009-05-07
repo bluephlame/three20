@@ -120,6 +120,8 @@
     _fields = [[NSArray alloc] initWithObjects:
       [[[TTMessageRecipientField alloc] initWithTitle:
         TTLocalizedString(@"To:", @"") required:YES] autorelease],
+//	  [[[TTMessageRecipientField alloc] initWithTitle:
+//		TTLocalizedString(@"Cc:", @"") required:NO] autorelease],
       [[[TTMessageSubjectField alloc] initWithTitle:
         TTLocalizedString(@"Subject:", @"") required:NO] autorelease],
       nil];
@@ -129,13 +131,13 @@
     
     self.title = TTLocalizedString(@"New Message", @"");
 
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:
       TTLocalizedString(@"Cancel", @"")
       style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)] autorelease];
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:
       TTLocalizedString(@"Send", @"")
       style:UIBarButtonItemStyleDone target:self action:@selector(send)] autorelease];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.leftBarButtonItem.enabled = NO;
   }
   return self;
 }
@@ -150,7 +152,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)send {
-  self.navigationItem.rightBarButtonItem.enabled = NO;
+  self.navigationItem.leftBarButtonItem.enabled = NO;
   
   if ([_delegate respondsToSelector:@selector(composeController:didSendFields:)]) {
     NSMutableArray* fields = [[_fields mutableCopy] autorelease];
@@ -283,7 +285,7 @@
     }
   }
 
-  _navigationBar.topItem.rightBarButtonItem.enabled = compliant && _textEditor.text.length;
+  _navigationBar.topItem.leftBarButtonItem.enabled = compliant && _textEditor.text.length;
 }
 
 - (UITextField*)subjectField {

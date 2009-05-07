@@ -17,6 +17,7 @@
 #import "TabBarTestController.h"
 #import "WebTestController.h"
 #import "Three20/developer.h"
+#import "MessageAddressbookTestController.h"
 
 @implementation RootViewController
 
@@ -47,6 +48,7 @@
   [nav addView:@"tableFieldTest" controller:[TableFieldTestController class]];
   [nav addView:@"styledTextTableTest" controller:[StyledTextTableTestController class]];
   [nav addView:@"composerTest" controller:[MessageTestController class]];
+	  [nav addView:@"AddressTest" controller:[MessageAddressbookTestController class]];
   [nav addView:@"searchTest" controller:[SearchTestController class]];
   [nav addView:@"activityTest" controller:[ActivityTestController class]];
   [nav addView:@"styleTest" controller:[StyleTestController class]];
@@ -79,6 +81,8 @@
     @"Text Fields",
     [[[TTTableField alloc] initWithText:@"Message Composer"
       url:@"tt://composerTest"] autorelease],
+	[[[TTTableField alloc] initWithText:@"Message Composer (/w Addr)"
+	  url:@"tt://AddressTest"] autorelease],
     [[[TTTableField alloc] initWithText:@"Search Bar"
       url:@"tt://searchTest"] autorelease],
 

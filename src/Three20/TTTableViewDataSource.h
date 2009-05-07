@@ -12,12 +12,15 @@
 
 - (NSIndexPath*)tableView:(UITableView*)tableView indexPathForObject:(id)object;
 
-- (void)tableView:(UITableView*)tableView prepareCell:(UITableViewCell*)cell
-        forRowAtIndexPath:(NSIndexPath*)indexPath;
+- (void)tableView:(UITableView*)tableView prepareCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath;
+
 
 - (void)tableView:(UITableView*)tableView search:(NSString*)text;
 
 - (void)load:(TTURLRequestCachePolicy)cachePolicy nextPage:(BOOL)nextPage;
+@optional
+- (UITableViewCell*)tableView:(UITableView*)tableView provideCellforRowAtIndexPath:(NSIndexPath*)indexPath;
+
 
 @end
 

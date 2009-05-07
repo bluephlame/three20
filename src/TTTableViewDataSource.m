@@ -35,23 +35,29 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView
                     cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   id object = [self tableView:tableView objectForRowAtIndexPath:indexPath];
-
-  Class cellClass = [self tableView:tableView cellClassForObject:object];
-  const char* className = class_getName(cellClass);
-  NSString* identifier = [[NSString alloc] initWithBytesNoCopy:(char*)className
+  UITableViewCell* cell = nil;
+  if([self respondsToSelector:@selector(tableView:provideCellforRowAtIndexPath:)])
+	 cell = [self tableView:tableView provideCellforRowAtIndexPath:indexPath];
+  if(!cell)
+  {
+	
+    Class cellClass = [self tableView:tableView cellClassForObject:object];
+    const char* className = class_getName(cellClass);
+    NSString* identifier = [[NSString alloc] initWithBytesNoCopy:(char*)className
                                            length:strlen(className)
                                            encoding:NSASCIIStringEncoding freeWhenDone:NO];
 
-  UITableViewCell* cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
-  if (cell == nil) {
-    cell = [[[cellClass alloc] initWithFrame:CGRectZero reuseIdentifier:identifier] autorelease];
-  }
-  [identifier release];
   
-  if ([cell isKindOfClass:[TTTableViewCell class]]) {
-    [(TTTableViewCell*)cell setObject:object];
-  }
-  
+    cell  = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+      cell = [[[cellClass alloc] initWithFrame:CGRectZero reuseIdentifier:identifier] autorelease];
+    }
+    [identifier release];
+   }
+    if ([cell isKindOfClass:[TTTableViewCell class]]) {
+      [(TTTableViewCell*)cell setObject:object];
+    }
+ 
   [self tableView:tableView prepareCell:cell forRowAtIndexPath:indexPath];
       
   return cell;
