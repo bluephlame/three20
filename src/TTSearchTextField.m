@@ -414,7 +414,7 @@ static const CGFloat kDesiredTableHeight = 150;
 }
 
 - (void)showSearchResults:(BOOL)show {
-  if (show && _dataSource && _SearchesAtAll) {
+  if (show && _dataSource && _SearchesAtAll &&[self isFirstResponder]) {
     self.tableView;
     
     if (!_shadowView) {

@@ -120,8 +120,8 @@
     _fields = [[NSArray alloc] initWithObjects:
       [[[TTMessageRecipientField alloc] initWithTitle:
         TTLocalizedString(@"To:", @"") required:YES] autorelease],
-//	  [[[TTMessageRecipientField alloc] initWithTitle:
-//		TTLocalizedString(@"Cc:", @"") required:NO] autorelease],
+	  [[[TTMessageRecipientField alloc] initWithTitle:
+		TTLocalizedString(@"Cc:", @"") required:NO] autorelease],
       [[[TTMessageSubjectField alloc] initWithTitle:
         TTLocalizedString(@"Subject:", @"") required:NO] autorelease],
       nil];

@@ -238,7 +238,7 @@ static CGFloat kMinCursorWidth = 50;
 - (void)showSearchResults:(BOOL)show {
 	
 		[super showSearchResults:show];
-  if (show && _SearchesAtAll) {
+  if (show && _SearchesAtAll && [self isFirstResponder]) {
     [self scrollToEditingLine:YES];
   } else {
     [self scrollToVisibleLine:YES];
