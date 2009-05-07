@@ -231,13 +231,14 @@ static CGFloat kMinCursorWidth = 50;
 // TTSearchTextField
 
 - (BOOL)hasText {
-  return self.text.length && ![self.text isEqualToString:kEmpty]
+  return (self.text.length > 0) && ![self.text isEqualToString:kEmpty]
     && ![self.text isEqualToString:kSelected];
 }
 
 - (void)showSearchResults:(BOOL)show {
-  [super showSearchResults:show];
-  if (show) {
+	
+		[super showSearchResults:show];
+  if (show && _SearchesAtAll) {
     [self scrollToEditingLine:YES];
   } else {
     [self scrollToVisibleLine:YES];

@@ -12,13 +12,13 @@
 
 @implementation TTComposeInnerScrollView
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-  if ([self pointInside:point withEvent:event]) {
-    return self;
-  } else {
-    return nil;
-  }
-}
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//  if ([self pointInside:point withEvent:event]) {
+//    return self;
+//  } else {
+//    return nil;
+//  }
+//}
 
 @end
 
@@ -209,12 +209,25 @@
 
   for (TTMessageField* field in _fields) {
     TTPickerTextField* textField = nil;
-    if ([field isKindOfClass:[TTMessageRecipientField class]]) {
+	
+	  if([field isKindOfClass:[TTMessageSubjectField class]])
+	  {
+		  textField = [[[TTPickerTextField alloc] initWithFrame:CGRectZero] autorelease];
+		  textField.dataSource = _dataSource;
+		  textField.autocorrectionType = UITextAutocorrectionTypeNo;
+		  textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		  textField.rightViewMode = UITextFieldViewModeAlways;
+		  textField.searchesAutomatically = NO;
+		  textField.searchesAtAll = NO;
+	  }
+      else if ([field isKindOfClass:[TTMessageRecipientField class]]) {
       textField = [[[TTPickerTextField alloc] initWithFrame:CGRectZero] autorelease];
       textField.dataSource = _dataSource;
       textField.autocorrectionType = UITextAutocorrectionTypeNo;
       textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
       textField.rightViewMode = UITextFieldViewModeAlways;
+	  textField.searchesAtAll = YES;
+
 
       if ([_delegate respondsToSelector:@selector(composeControllerShowRecipientPicker:)]) {
         UIButton* addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
@@ -422,7 +435,9 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
   NSUInteger fieldIndex = [_fieldViews indexOfObject:textField];
-  UIView* nextView = fieldIndex == _fieldViews.count-1
+  
+	//TODO: problem i think
+	UIView* nextView = fieldIndex == _fieldViews.count-1
     ? _textEditor.textView
     : [_fieldViews objectAtIndex:fieldIndex+1];
   [nextView becomeFirstResponder];

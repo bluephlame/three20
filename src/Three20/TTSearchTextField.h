@@ -5,10 +5,14 @@
 
 @interface TTSearchTextField : UITextField <UITableViewDelegate> {
   id<TTTableViewDataSource> _dataSource;
-  TTSearchTextFieldInternal* _internal;
-  UITableView* _tableView;
-  TTView* _shadowView;
-  UIButton* _screenView;
+ 
+	TTSearchTextFieldInternal* _internal;
+  
+	UITableView* _tableView;
+
+	TTView* _shadowView;
+  
+	UIButton* _screenView;
   UINavigationItem* _previousNavigationItem;
   UIBarButtonItem* _previousRightBarButtonItem;
   NSTimer* _searchTimer;
@@ -16,6 +20,7 @@
   BOOL _searchesAutomatically;
   BOOL _showsDoneButton;
   BOOL _showsDarkScreen;
+  BOOL _SearchesAtAll;
 }
 
 @property(nonatomic,retain) id<TTTableViewDataSource> dataSource;
@@ -25,6 +30,7 @@
 @property(nonatomic) BOOL searchesAutomatically;
 @property(nonatomic) BOOL showsDoneButton;
 @property(nonatomic) BOOL showsDarkScreen;
+@property(nonatomic) BOOL searchesAtAll;
 
 - (void)search;
 

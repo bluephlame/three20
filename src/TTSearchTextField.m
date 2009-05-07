@@ -63,9 +63,15 @@ static const CGFloat kDesiredTableHeight = 150;
     [_delegate textFieldDidEndEditing:textField];
   }
   
-  if (_textField.dataSource) {
-    textField.text = @"";
-  }
+//	if([self isEmail:textField.text])
+//	{
+//		//add in a bubbled email address.
+//	}
+//TODO: Just here resets the Subject line
+// This field does not need a datasource, so should figure out how not to apply it.  
+//  if (_textField.dataSource) {
+//    textField.text = @"";
+//  }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
@@ -117,7 +123,7 @@ static const CGFloat kDesiredTableHeight = 150;
 
 @synthesize dataSource = _dataSource, tableView = _tableView, rowHeight = _rowHeight,
   searchesAutomatically = _searchesAutomatically, showsDoneButton = _showsDoneButton,
-  showsDarkScreen = _showsDarkScreen;
+  showsDarkScreen = _showsDarkScreen, searchesAtAll = _SearchesAtAll;
 
 - (id)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
@@ -137,6 +143,7 @@ static const CGFloat kDesiredTableHeight = 150;
     self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.searchesAutomatically = YES;
+	  self.searchesAtAll = YES;
     
     [self addTarget:self action:@selector(didBeginEditing)
       forControlEvents:UIControlEventEditingDidBegin];
@@ -217,7 +224,8 @@ static const CGFloat kDesiredTableHeight = 150;
 }
 
 - (void)autoSearch {
-  if (_searchesAutomatically || !self.text.length) {
+  if(_SearchesAtAll)
+   if (_searchesAutomatically || !self.text.length) {
     [self search];
   }
 }
@@ -233,9 +241,15 @@ static const CGFloat kDesiredTableHeight = 150;
 }
 
 - (void)reloadTable {
-  if ((![_dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)]
+  if (
+	  (![_dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)]
       || [_dataSource numberOfSectionsInTableView:_tableView])
-      && [_dataSource tableView:_tableView numberOfRowsInSection:0]) {
+      && [_dataSource tableView:_tableView numberOfRowsInSection:0]) 
+  
+  {
+	//if(![self searchesAtAll])
+	  //TODO:if this gets called, the bug happens.
+	  // perhaps figure out how to make the subject line not a TTSearchTextField
     [self showSearchResults:YES];
     [self.tableView reloadData];
   } else {
@@ -363,7 +377,7 @@ static const CGFloat kDesiredTableHeight = 150;
 - (UITableView*)tableView {
   if (!_tableView) {
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    _tableView.backgroundColor = TTSTYLEVAR(searchTableBackgroundColor);
+	  _tableView.backgroundColor = TTSTYLEVAR(searchTableBackgroundColor);
     _tableView.separatorColor = TTSTYLEVAR(searchTableSeparatorColor);
     _tableView.rowHeight = _rowHeight;
     _tableView.dataSource = _dataSource;
@@ -385,8 +399,11 @@ static const CGFloat kDesiredTableHeight = 150;
   }
 }
 
+
+
 - (BOOL)hasText {
-  return self.text.length;
+	NSLog(self.text);
+	return (self.text.length > 0);
 }
 
 - (void)search {
@@ -397,7 +414,7 @@ static const CGFloat kDesiredTableHeight = 150;
 }
 
 - (void)showSearchResults:(BOOL)show {
-  if (show && _dataSource) {
+  if (show && _dataSource && _SearchesAtAll) {
     self.tableView;
     
     if (!_shadowView) {
@@ -414,7 +431,7 @@ static const CGFloat kDesiredTableHeight = 150;
       
       UIView* superview = self.superviewForSearchResults;
       [superview addSubview:_tableView];
-
+		NSLog(@"ADDING SUBVIEW TO SUPER VIEW %@ %@", _tableView,superview);
       if (_tableView.separatorStyle != UITableViewCellSeparatorStyleNone) {
         [superview addSubview:_shadowView];
       }
