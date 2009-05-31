@@ -2,6 +2,7 @@
 #import "Three20/TTNavigationCenter.h"
 #import "Three20/TTView.h"
 #import "Three20/TTDefaultStyleSheet.h"
+#import "Three20/TTTableView.h"
 #import "Three20/TTTableFieldCell.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +73,9 @@ static const CGFloat kDesiredTableHeight = 150;
 //  if (_textField.dataSource) {
 //    textField.text = @"";
 //  }
+  if (_textField.dataSource) {
+    textField.text = @"";
+  }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
@@ -244,12 +248,8 @@ static const CGFloat kDesiredTableHeight = 150;
   if (
 	  (![_dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)]
       || [_dataSource numberOfSectionsInTableView:_tableView])
-      && [_dataSource tableView:_tableView numberOfRowsInSection:0]) 
-  
-  {
-	//if(![self searchesAtAll])
-	  //TODO:if this gets called, the bug happens.
-	  // perhaps figure out how to make the subject line not a TTSearchTextField
+      && [_dataSource tableView:_tableView numberOfRowsInSection:0]) {
+    [self layoutIfNeeded];
     [self showSearchResults:YES];
     [self.tableView reloadData];
   } else {
@@ -376,8 +376,8 @@ static const CGFloat kDesiredTableHeight = 150;
 
 - (UITableView*)tableView {
   if (!_tableView) {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-	  _tableView.backgroundColor = TTSTYLEVAR(searchTableBackgroundColor);
+    _tableView = [[TTTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _tableView.backgroundColor = TTSTYLEVAR(searchTableBackgroundColor);
     _tableView.separatorColor = TTSTYLEVAR(searchTableSeparatorColor);
     _tableView.rowHeight = _rowHeight;
     _tableView.dataSource = _dataSource;
@@ -436,12 +436,11 @@ static const CGFloat kDesiredTableHeight = 150;
         [superview addSubview:_shadowView];
       }
     }
+    
+    [_tableView deselectRowAtIndexPath:_tableView.indexPathForSelectedRow animated:NO];
   } else {
-    UIView* parent = self.superview;
-    if (parent) {
-      [_tableView removeFromSuperview];
-      [_shadowView removeFromSuperview];
-    }
+    [_tableView removeFromSuperview];
+    [_shadowView removeFromSuperview];
   }
 }
 
@@ -469,7 +468,7 @@ static const CGFloat kDesiredTableHeight = 150;
     y += view.top;
     view = view.superview;
   }  
-
+  
   CGFloat height = self.height;
   CGFloat keyboardHeight = withKeyboard ? KEYBOARD_HEIGHT : 0;
   CGFloat tableHeight = self.window.height - (self.screenY + height + keyboardHeight);

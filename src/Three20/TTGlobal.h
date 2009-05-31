@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #import "Three20/NSObjectAdditions.h"
 #import "Three20/NSStringAdditions.h"
+#import "Three20/NSDateAdditions.h"
 #import "Three20/NSArrayAdditions.h"
 #import "Three20/UIColorAdditions.h"
 #import "Three20/UIImageAdditions.h"
@@ -184,6 +185,11 @@ void TTNetworkRequestStarted();
  * The status bar activity indicator will be spinning while there are active requests.
  */
 void TTNetworkRequestStopped();
+
+/**
+ * Gets the current version of iPhone OS.
+ */
+float TTOSVersion();
 
 /**
  * Gets the current system locale chosen by the user.
